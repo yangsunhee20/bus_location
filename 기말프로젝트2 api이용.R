@@ -1,24 +1,19 @@
 
 
 install.packages("XML")
-#install.packages("ggplot2")
 install.packages("colorspace")
-#library(ggmap)
-#library(ggplot2)
 library(colorspace)
 library(XML)
 
 
 busRtNm = "11-1" 
-API_key = "4e8LrQXnJ885Nbj2uv8uoDsutLKVYVpHi43tCpTwjN9QaY4YVmNSDMHtFb6tBGGHvznsaWw9smAkCTXan8j4JQ%3D%3D"
+API_key = " my key "
 url = paste("http://apis.data.go.kr/6410000/busrouteservice/getBusRouteList?serviceKey=", 
             API_key,"&keyword=",busRtNm,sep="")
 
 xmefile = xmlParse(url)
-# À¥¿¡¼­ XMLÀ» ´Ù¿î·Îµå ÇÏ´Â °ÍÀÓ 
 xmlRoot(xmefile)
-# ¾î¶² ¸ğ½ÀÀÎ°¡ Ãâ·ÂÇÔ
-df = xmlToDataFrame(getNodeSet(xmefile, "//busRouteList"))  # µ¥ÀÌÅÍÇÁ·¹ÀÓÀ¸·Î Ãâ·Â
+df = xmlToDataFrame(getNodeSet(xmefile, "//busRouteList"))  # ë°ì´í„°í”„ë ˆì„ìœ¼ë¡œ ì¶œë ¥
 t(df);
 df=head(df)
 
@@ -27,7 +22,7 @@ df=head(df)
 # region_name=df$regionName
 
 
-suwon_bus =df[df$regionName=="¼ö¿ø",]
+suwon_bus =df[df$regionName=="ìˆ˜ì›",]
 suwon_bus_routeID=suwon_bus$routeId
 
 
@@ -84,10 +79,9 @@ url1 = paste("http://apis.data.go.kr/6410000/buslocationservice/getBusLocationLi
             API_key,"&routeId=",suwon_bus_routeID,sep="")
 
 xmefile1 = xmlParse(url1)
-# À¥¿¡¼­ XMLÀ» ´Ù¿î·Îµå ÇÏ´Â °ÍÀÓ 
 xmlRoot(xmefile1)
-# ¾î¶² ¸ğ½ÀÀÎ°¡ Ãâ·ÂÇÔ
-df0 = xmlToDataFrame(getNodeSet(xmefile1, "//busLocationList"))  # µ¥ÀÌÅÍÇÁ·¹ÀÓÀ¸·Î Ãâ·Â
+
+df0 = xmlToDataFrame(getNodeSet(xmefile1, "//busLocationList"))  
 t(df0);
 head(df0)
 
