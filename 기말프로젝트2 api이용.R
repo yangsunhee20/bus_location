@@ -13,7 +13,7 @@ url = paste("http://apis.data.go.kr/6410000/busrouteservice/getBusRouteList?serv
 
 xmefile = xmlParse(url)
 xmlRoot(xmefile)
-df = xmlToDataFrame(getNodeSet(xmefile, "//busRouteList"))  # 데이터프레임으로 출력
+df = xmlToDataFrame(getNodeSet(xmefile, "//busRouteList")) 
 t(df);
 df=head(df)
 
